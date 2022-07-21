@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className='grid-container'>
+      <header>   
+        <div className="logo">
+          <a href="/">
+            <img src="logo.png" alt="Logotipo" width={32} />
+            My-Shopee
+          </a>
+        </div>     
       </header>
+      <main>
+        Lista de Produtos
+      </main>
+      <footer>
+        Todos os direitos reservados.
+      </footer>
     </div>
   );
 }
