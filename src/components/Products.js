@@ -13,9 +13,9 @@ export default class Products extends Component {
                   <p>{prod.title}</p>
                 </a>
                 <div className="product-price">
-                  <div>{prod.price}</div>
+                  <div>R$ {prod.price.toFixed(2)}</div>
                   <button className="button primary">
-                    Adicionar ao Carrinho
+                    Adicionar
                   </button>
                 </div>
               </div>
