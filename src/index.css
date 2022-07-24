@@ -204,3 +204,24 @@ a:hover {
 .total > div, .total > button {
   flex: 1;
 }
+
+.cart form {
+  width: 100%;
+}
+
+.cart form input {
+  padding: 1rem;
+  border: .1rem #c0c0c0 solid;
+}
+
+.form-container {
+  padding: 0;
+  list-style-type: none;
+}
+
+.form-container li {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
