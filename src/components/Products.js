@@ -4,14 +4,15 @@ import Modal from 'react-modal'
 import { Zoom } from "react-reveal";
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from "../store/Products.store";
+import { addToCart } from "../store/Cart.store";
 
 Modal.setAppElement('#root')
 
 export default function Products(props) {
   const [product, setProduct] = useState(null);
 
-  const { filteredItems: products, status } = useSelector(state => state.products)
-  const dispatch = useDispatch()
+  const { filteredItems: products, status } = useSelector(state => state.products);
+  const dispatch = useDispatch();
 
   function openModal(product) {
     setProduct(product);
@@ -47,7 +48,7 @@ export default function Products(props) {
                       <div>R$ {prod.price.toFixed(2)}</div>
                       <button
                         className="button primary"
-                        onClick={() => props.addToCart(prod)}
+                        onClick={() => dispatch(addToCart(prod))}
                       >Adicionar
                       </button>
                     </div>
@@ -90,7 +91,7 @@ export default function Products(props) {
                     <button
                       className="button primary"
                       onClick={() => {
-                        props.addToCart(product);
+                        dispatch(addToCart(product));
                         closeModal();
                       }}
                     >
