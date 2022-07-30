@@ -5,10 +5,12 @@ import { Zoom } from "react-reveal";
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from "../store/Products.store";
 
+Modal.setAppElement('#root')
+
 export default function Products(props) {
   const [product, setProduct] = useState(null);
 
-  const products = useSelector(state => state.products.lista)
+  const { filteredItems: products, status } = useSelector(state => state.products)
   const dispatch = useDispatch()
 
   function openModal(product) {
@@ -26,10 +28,13 @@ export default function Products(props) {
   return (
     <div>
       <Fade bottom cascade={true}>
-        {!products
-          ? (
+        {!products ? (
+            <div>Nenhum produto disponível.</div>
+          ) :
+          status === "aguarde" ? (
             <div>Aguarde...</div>
-          ) : (
+          ) :
+          (
             <ul className="products">
               {products.map(prod => (
                 <li key={prod._id}>

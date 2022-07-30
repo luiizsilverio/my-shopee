@@ -11,7 +11,8 @@ export const getProducts = createAsyncThunk(
 )
 
 const initialState = {
-  lista: [],
+  items: [],
+  filteredItems: [],
   status: "",
   error: false
 }
@@ -20,14 +21,36 @@ const products = createSlice({
     name: 'products',
     initialState,
     reducers: {
-
+      filterProducts (state, param) {
+        const { payload: size } = param;
+        if (size === "") {
+          state.filteredItems = [...state.items];
+        } else {
+          state.filteredItems = [...state.items]
+            .filter(x => x.availableSizes.indexOf(size) >= 0);
+        }
+      },
+      sortProducts (state, param) {
+        const { payload: sort } = param;
+        const sortedProducts = [...state.filteredItems];
+        sortedProducts.sort((a, b) => (
+            sort === "lowestprice"
+              ? (a.price > b.price ? 1 : -1)
+              : sort === "highestprice"
+                ? (a.price < b.price ? 1 : -1)
+                : (a._id > b._id ? 1 : -1)
+          )
+        );
+        state.filteredItems = sortedProducts;
+      }
     },
     extraReducers: (builder) => {
         builder.addCase(getProducts.pending, (state) => {
-          state.status = 'aguarde...';
+          state.status = 'aguarde';
         });
         builder.addCase(getProducts.fulfilled, (state, action) => {
-          state.lista = action.payload;
+          state.items = action.payload;
+          state.filteredItems = action.payload;
           state.status = 'sucesso';
           state.error = false;
         });
@@ -38,6 +61,6 @@ const products = createSlice({
     }
 })
 
-// export const { aqui a lista de reducers... } = products.actions
+export const { filterProducts, sortProducts } = products.actions
 
 export default products.reducer
