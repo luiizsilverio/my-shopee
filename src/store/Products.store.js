@@ -17,7 +17,7 @@ const initialState = {
   error: false
 }
 
-const products = createSlice({
+const productsSlice = createSlice({
     name: 'products',
     initialState,
     reducers: {
@@ -30,6 +30,7 @@ const products = createSlice({
             .filter(x => x.availableSizes.indexOf(size) >= 0);
         }
       },
+
       sortProducts (state, param) {
         const { payload: sort } = param;
         const sortedProducts = [...state.filteredItems];
@@ -44,6 +45,7 @@ const products = createSlice({
         state.filteredItems = sortedProducts;
       }
     },
+
     extraReducers: (builder) => {
         builder.addCase(getProducts.pending, (state) => {
           state.status = 'aguarde';
@@ -61,6 +63,6 @@ const products = createSlice({
     }
 })
 
-export const { filterProducts, sortProducts } = products.actions
+export const { filterProducts, sortProducts } = productsSlice.actions
 
-export default products.reducer
+export default productsSlice.reducer
