@@ -1,8 +1,9 @@
 import { useState } from "react";
-import Fade from 'react-reveal/Fade';
+import Modal from 'react-modal'
+import { Fade, Zoom } from "react-reveal";
 import { useDispatch, useSelector } from 'react-redux';
-import { removeFromCart } from "../store/Cart.store";
-import { createOrder } from "../store/Order.store";
+import { removeFromCart, clearCart } from "../store/Cart.store";
+import { clearOrder, createOrder } from "../store/Order.store";
 
 export default function Cart() {
   const [name, setName] = useState("");
@@ -11,6 +12,7 @@ export default function Cart() {
   const [showCheckout, setShowCheckout] = useState(false);
 
   const { cartItems } = useSelector(state => state.cart);
+  const { order } = useSelector(state => state.order);
   const dispatch = useDispatch();
 
   function handleCreateOrder(e) {
@@ -27,6 +29,12 @@ export default function Cart() {
     dispatch(createOrder(order));
   }
 
+  function closeModal() {
+    dispatch(clearOrder());
+    dispatch(clearCart());
+    setShowCheckout(false);
+  }
+
   return (
   <>
     <div>
@@ -40,6 +48,55 @@ export default function Cart() {
         </div>
       )}
     </div>
+
+    {
+      order && (
+        <Modal
+          isOpen={true}
+          onRequestClose={closeModal}
+        >
+          <Zoom>
+            <button className="close-modal" onClick={closeModal}>x</button>
+            <div className="order-details">
+              <h3 className="success-message">Seu pedido foi enviado.</h3>
+              <h2>Pedido {order._id}</h2>
+              <ul>
+                <li>
+                  <div>Nome:</div>
+                  <div>{order.name}</div>
+                </li>
+                <li>
+                  <div>E-mail:</div>
+                  <div>{order.email}</div>
+                </li>
+                <li>
+                  <div>Endereço:</div>
+                  <div>{order.address}</div>
+                </li>
+                <li>
+                  <div>Data:</div>
+                  <div>{order.createdAt}</div>
+                </li>
+                <li>
+                  <div>Total:</div>
+                  <div>R$ {order.total.toFixed(2)}</div>
+                </li>
+                <li>
+                  <div>Itens:</div>
+                  <div>{
+                    order.cartItems.map((item) => (
+                      <div>
+                        {item.count} x {item.title}
+                      </div>
+                    ))}
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </Zoom>
+        </Modal>
+      )
+    }
     <div>
       <div className="cart">
         <Fade left cascade>

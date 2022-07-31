@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import Fade from 'react-reveal/Fade';
+import { Fade, Zoom } from 'react-reveal';
 import Modal from 'react-modal'
-import { Zoom } from "react-reveal";
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from "../store/Products.store";
 import { addToCart } from "../store/Cart.store";
