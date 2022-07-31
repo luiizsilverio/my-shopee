@@ -1,6 +1,6 @@
 <table>
   <tr>
-    <td><img src="https://github.com/luiizsilverio/my-shopee/blob/main/public/logo.png" /></td>
+    <td><img src="https://github.com/luiizsilverio/my-shopee/blob/main/public/logo.png" style="width: 48px;" /></td>
     <td><h1>MY-SHOPEE</h1></td>
   </tr>
 </table>
@@ -13,10 +13,11 @@
 * [Licença](#balance_scale-licença)
 * [Contato](#email-contato)
 
+
 ## Sobre o projeto
 Aplicação de E-Commerce desenvolvida durante o curso [React Redux Shopping Cart Tutorial For Beginners 2022](https://www.youtube.com/watch?v=nKyrXWH5XLM), do canal __Coding with Basir__.<br />
 Possui um __back-end__ simples, desenvolvido em __Node.js__, que armazena os produtos e pedidos no banco __MongoDB__.
-O __front-end__ é desenvolvido em __React__ e utiliza __ReduxJs/Toolkit__ para armazenar os estados.<br />
+O __front-end__ é desenvolvido em __React__ e utiliza __ReduxJs/Toolkit__ para armazenar os estados.<br /><br />
 
 
 ## :hammer_and_wrench: Tecnologias
@@ -32,7 +33,7 @@ O __front-end__ é desenvolvido em __React__ e utiliza __ReduxJs/Toolkit__ para 
 
 
 ## :camera_flash: Screenshots
-![](https://github.com/luiizsilverio/my-shopee/blob/main/public/my-shopee.mp4)
+![](https://github.com/luiizsilverio/my-shopee/blob/main/public/my-shopee.gif)
 
 
 ## :car: Iniciando a aplicação
