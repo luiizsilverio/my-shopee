@@ -2,6 +2,7 @@ import { useState } from "react";
 import Fade from 'react-reveal/Fade';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeFromCart } from "../store/Cart.store";
+import { createOrder } from "../store/Order.store";
 
 export default function Cart() {
   const [name, setName] = useState("");
@@ -12,17 +13,18 @@ export default function Cart() {
   const { cartItems } = useSelector(state => state.cart);
   const dispatch = useDispatch();
 
-  function createOrder(e) {
+  function handleCreateOrder(e) {
     e.preventDefault();
 
     const order = {
-      name: this.state.name,
-      email: this.state.email,
-      address: this.state.address,
-      cartItems: this.props.cartItems
+      name,
+      email,
+      address,
+      cartItems,
+      total: cartItems.reduce((acc, i) => (acc + i.price * i.count), 0),
     }
 
-    this.props.createOrder(order);
+    dispatch(createOrder(order));
   }
 
   return (
@@ -86,7 +88,7 @@ export default function Cart() {
             showCheckout && (
               <Fade top cascade>
                 <div className="cart">
-                  <form onSubmit={this.createOrder}>
+                  <form onSubmit={handleCreateOrder}>
                     <ul className="form-container">
                       <li>
                         <label>E-mail</label>
@@ -117,7 +119,9 @@ export default function Cart() {
                         />
                       </li>
                       <li>
-                        <button type="submit" className="button primary">Confirma</button>
+                        <button type="submit" className="button primary">
+                          Confirma
+                        </button>
                       </li>
                     </ul>
                   </form>
