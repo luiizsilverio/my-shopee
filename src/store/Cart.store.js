@@ -37,10 +37,15 @@ const cartSlice = createSlice({
 
         state.cartItems = [...cartItems];
         localStorage.setItem('myshopee.cart', JSON.stringify(cartItems));
+      },
+
+      clearCart (state) {
+        state.cartItems = [];
+        localStorage.removeItem("myshopee.cart")
       }
     }
 })
 
-export const { addToCart, removeFromCart } = cartSlice.actions
+export const { addToCart, removeFromCart, clearCart } = cartSlice.actions
 
 export default cartSlice.reducer

@@ -29,6 +29,8 @@ const orderSlice = createSlice({
     reducers: {
       clearOrder (state) {
         state.order = null;
+        state.status = "";
+        state.error = "";
       }
     },
 
